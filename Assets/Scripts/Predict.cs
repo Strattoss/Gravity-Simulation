@@ -49,7 +49,12 @@ public class Predictor : MonoBehaviour
             ghostToReal[ghostGravitybodies[i]] = realGravitybodies[i];
         }
 
+        // so they don't mess up during our prediction
+        _realSimulationManagerGameObject.SetActive(false);
+        _realCelestialBodiesParent.SetActive(false);
+
         _ghostSimulationManagerGameObject = Instantiate(_realSimulationManagerGameObject);
+        _ghostSimulationManagerGameObject.SetActive(true);
         SceneManager.MoveGameObjectToScene(_ghostSimulationManagerGameObject, _simulationScene);
         _ghostSimulationManagerGameObject.GetComponent<GravityManager>().celestialBodiesParent = _ghostCelestialBodiesParent;
     }
@@ -88,5 +93,9 @@ public class Predictor : MonoBehaviour
         Destroy(_ghostCelestialBodiesParent);
         Physics.simulationMode = SimulationMode.FixedUpdate;
         SceneManager.UnloadSceneAsync(_simulationScene);
+
+        // now they can be safely enabled back
+        _realSimulationManagerGameObject.SetActive(true);
+        _realCelestialBodiesParent.SetActive(true);
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GravityManager : MonoBehaviour
 {
-    public readonly LinkedList<Gravitybody> gravitybodies = new LinkedList<Gravitybody>();
+    public LinkedList<Gravitybody> gravitybodies { get; } = new LinkedList<Gravitybody>();
 
     private GameObject _celestialBodiesParent;
     public GameObject celestialBodiesParent
@@ -30,7 +30,7 @@ public class GravityManager : MonoBehaviour
         foreach (Gravitybody gb in _celestialBodiesParent.GetComponentsInChildren<Gravitybody>())
         {
             gravitybodies.AddFirst(gb);
-            gb.simulationManager = this;
+            gb.SearchForAndSetGravityManager();
         }
     }
 

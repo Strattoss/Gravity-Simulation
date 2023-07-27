@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Gravitybody : MonoBehaviour
 {
-    public GravityManager simulationManager;
+    private GravityManager _simulationManager;
     public Vector3 position
     {
         get { return transform.position; }
@@ -56,6 +56,15 @@ public class Gravitybody : MonoBehaviour
 
     // [SerializeField] private bool interacts = true;
 
+    public void SearchForAndSetGravityManager() {
+        GameObject[] simulationManagers = GameObject.FindGameObjectsWithTag("SimulationManager");
+        print("Name: " + gameObject.scene.name + ", length: " + simulationManagers.Length);
+        if (simulationManagers.Length != 1) {
+            throw new System.Exception("There should be exactly one SimulationManager!");
+        }
+        _simulationManager = simulationManagers[0].GetComponent<GravityManager>();
+    }
+
     // private void SignOutOfGravityManager()
     // {
     //     simulationManager.SignGravitybodyOut(this);
@@ -93,7 +102,7 @@ public class Gravitybody : MonoBehaviour
         Vector3 summedForce = new Vector3(0, 0, 0);
         Vector3 distance;
 
-        foreach (var otherGravitybody in simulationManager.gravitybodies)
+        foreach (var otherGravitybody in _simulationManager.gravitybodies)
         {
             if (otherGravitybody == this) continue;
             distance = position - otherGravitybody.position;
