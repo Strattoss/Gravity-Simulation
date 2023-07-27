@@ -78,7 +78,7 @@ public class Predictor : MonoBehaviour
         // trim prediction lines (if a body was destroyed, the prediction line should end on body's last position)
         foreach (var gb in _realSimulationManagerGameObject.GetComponent<GravityManager>().gravitybodies)
         {
-            gb.GetComponent<Gravitybody>().TrimPredictionLine();
+            gb.GetComponent<PredictionLine>().TrimPredictionLine();
         }
     }
 

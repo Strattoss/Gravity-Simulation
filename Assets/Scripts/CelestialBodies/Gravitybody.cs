@@ -61,60 +61,6 @@ public class Gravitybody : MonoBehaviour
     //     simulationManager.SignGravitybodyOut(this);
     // }
 
-    #region Prediction Line Manipulation
-    private void RemoveLastPointFromPredictionLine()
-    {
-        LineRenderer lineRenderer = this.GetComponent<LineRenderer>();
-
-        if (lineRenderer.positionCount > 0)
-        {
-            lineRenderer.positionCount--;
-        }
-    }
-
-    public void TrimPredictionLine()
-    {
-        // LineRenderer lineRenderer = this.GetComponent<LineRenderer>();
-        // for (int i = 0; i < lineRenderer.positionCount; i++)
-        // {
-        //     if (lineRenderer.GetPosition(i).Equals(Vector3.zero)) {
-        //         Vector3[] positions = new Vector3[lineRenderer.positionCount];
-        //         lineRenderer.GetPositions(positions);
-
-        //         lineRenderer.positionCount = i;
-        //         Vector3[] newPositions = new Vector3[lineRenderer.positionCount - i];
-        //         for (int j = 0; j < lineRenderer.positionCount - i; j++)
-        //         {
-        //             newPositions[j] = positions[i+j];
-        //         }
-
-        //         lineRenderer.SetPositions(newPositions);
-        //         break;
-        //     }
-        // }
-        LineRenderer lineRenderer = GetComponent<LineRenderer>();
-        int shift = 0;
-
-        for (int i = 0; i < lineRenderer.positionCount; i++)
-        {
-            if (!lineRenderer.GetPosition(i).Equals(Vector3.zero))
-            {
-                // Shift non-zero positions to the front of the array
-                // TODO: Czy to wykonuje się tylko raz?
-                lineRenderer.SetPosition(i - shift, lineRenderer.GetPosition(i));
-            }
-            else
-            {
-                shift++;
-            }
-        }
-
-        // Set the new position count to remove the trailing zero positions
-        lineRenderer.positionCount -= shift;
-    }
-    #endregion
-
-
     #region Verlet Integration
     /*  
     Shortened algorithm idea:
@@ -139,7 +85,6 @@ public class Gravitybody : MonoBehaviour
     public void VerletStep3()
     {
         position += 0.5f * Time.fixedDeltaTime * velocity;
-        RemoveLastPointFromPredictionLine();
     }
 
 

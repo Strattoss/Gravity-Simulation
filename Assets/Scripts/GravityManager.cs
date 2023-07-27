@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GravityManager : MonoBehaviour
 {
-    public LinkedList<Gravitybody> gravitybodies = new LinkedList<Gravitybody>();
+    public readonly LinkedList<Gravitybody> gravitybodies = new LinkedList<Gravitybody>();
 
     private GameObject _celestialBodiesParent;
     public GameObject celestialBodiesParent

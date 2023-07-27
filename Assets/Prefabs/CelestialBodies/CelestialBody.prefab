@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 2682711698080765903}
   - component: {fileID: -8407736071533340170}
   - component: {fileID: 2808523495901011692}
+  - component: {fileID: 7028707364487925580}
   m_Layer: 0
   m_Name: CelestialBody
   m_TagString: CelestialBody
@@ -379,3 +380,15 @@ MonoBehaviour:
   simulationManager: {fileID: 0}
   <velocity>k__BackingField: {x: 0, y: 0, z: 0}
   _mass: 1
+--- !u!114 &7028707364487925580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2566753630711746717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfac8d6065bbba349a2276fc1414b051, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
