@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/PredictionTest_AndWithPhysics!.unity
+    path: Assets/Scenes/PredictionAndCollisionTest.unity
     guid: 73fb7586b3ec9b14787b24e1751b4d85
   m_configObjects: {}

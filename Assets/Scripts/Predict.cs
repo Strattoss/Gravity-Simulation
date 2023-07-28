@@ -55,6 +55,7 @@ public class Predictor : MonoBehaviour
 
         _ghostSimulationManagerGameObject = Instantiate(_realSimulationManagerGameObject);
         _ghostSimulationManagerGameObject.SetActive(true);
+        _ghostSimulationManagerGameObject.GetComponent<Statistics>().enabled = false;
         SceneManager.MoveGameObjectToScene(_ghostSimulationManagerGameObject, _simulationScene);
         _ghostSimulationManagerGameObject.GetComponent<GravityManager>().celestialBodiesParent = _ghostCelestialBodiesParent;
     }

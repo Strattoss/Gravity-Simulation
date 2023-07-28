@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MyStatistics : MonoBehaviour
+public class Statistics : MonoBehaviour
 {
     private GravityManager _gravityManager;
     public float kineticEnergy, potentialEnergy, totalEnergy;

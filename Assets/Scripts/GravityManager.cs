@@ -34,6 +34,13 @@ public class GravityManager : MonoBehaviour
         }
     }
 
+    public void SignGravitybodyOut(Gravitybody gb) {
+        // Debug.Log("Before: " + gravitybodies.Count);
+        var b = gravitybodies.Remove(gb);
+        // Debug.Log("Result of signing out: " + b);
+        // Debug.Log("After: " + gravitybodies.Count);
+    }
+
     void FixedUpdate()
     {
         DoScenewideVerletStep();
@@ -41,9 +48,12 @@ public class GravityManager : MonoBehaviour
 
     public void DoScenewideVerletStep()
     {
+        int i = 0;
         foreach (var gravitybody in gravitybodies)
         {
+            // Debug.Log("Trying Verlet1 on: " + gravitybody.name + " on position: " + i);
             gravitybody.VerletStep1();
+            i++;
         }
 
         foreach (var gravitybody in gravitybodies)

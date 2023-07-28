@@ -29,46 +29,38 @@ public class Gravitybody : MonoBehaviour
         }
     }
 
-    // _mass property exists only so I can see it and modify it in the Inspector
-    [SerializeField] private float _mass = 1.0f;
-    public float mass
-    {
-        get { return _mass; }
-        set
-        {
-            // Update the Rigidbody's mass when the property is set
-            _mass = value;
-            GetComponent<Rigidbody>().mass = _mass;
-        }
-    }
-    // old implementation
-    // public float mass
-    // {
-    //     get
-    //     {
-    //         return GetComponent<Rigidbody>().mass;
-    //     }
-    //     set
-    //     {
-    //         GetComponent<Rigidbody>().mass = value;
-    //     }
-    // }
+    [field:SerializeField] public float mass { get; private set;}
 
     // [SerializeField] private bool interacts = true;
 
     public void SearchForAndSetGravityManager() {
         GameObject[] simulationManagers = GameObject.FindGameObjectsWithTag("SimulationManager");
-        print("Name: " + gameObject.scene.name + ", length: " + simulationManagers.Length);
         if (simulationManagers.Length != 1) {
             throw new System.Exception("There should be exactly one SimulationManager!");
         }
         _simulationManager = simulationManagers[0].GetComponent<GravityManager>();
     }
 
-    // private void SignOutOfGravityManager()
-    // {
-    //     simulationManager.SignGravitybodyOut(this);
-    // }
+    protected void SignOutOfGravityManager()
+    {
+        // Debug.Log("Signing out: " + this);
+        _simulationManager.SignGravitybodyOut(this);
+    }
+
+    public void MergeWith(Gravitybody otherGb) {
+        // Debug.Log(gameObject.name + " signs out " + otherGb.gameObject.name);
+        otherGb.SignOutOfGravityManager();
+
+        // average position regarding positions with masses as weights
+        position = (position * mass + otherGb.position * otherGb.mass) / (mass + otherGb.mass);
+
+        velocity = (momentum + otherGb.momentum) / (mass + otherGb.mass);
+
+        mass += otherGb.mass;
+
+        // Debug.Log(gameObject.name + " destroys " + otherGb.gameObject.name);
+        Destroy(otherGb.gameObject);
+    }
 
     #region Verlet Integration
     /*  
@@ -114,23 +106,5 @@ public class Gravitybody : MonoBehaviour
     }
     #endregion
 
-    // Used for comparisons. Decides eg. which body will be "eaten" by another during merging
-    private bool IsInferior(Gravitybody otherGb)
-    {
-        if (otherGb.mass > mass) return true;
-        if (otherGb.mass < mass) return false;
-
-        // equal masses
-        return otherGb.velocity.magnitude > velocity.magnitude;
-    }
-
-    // Used for comparisons. Decides eg. which body will be "eaten" by another during merging
-    private bool IsSuperior(Gravitybody otherGb)
-    {
-        return !IsInferior(otherGb);
-    }
-    public override string ToString()
-    {
-        return "Name: " + transform.name + ", position: " + position + ", velocity: " + velocity + ", mass: " + mass;
-    }
+    
 }

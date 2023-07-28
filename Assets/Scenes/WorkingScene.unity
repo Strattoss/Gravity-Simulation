@@ -539,7 +539,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6242531257927006599, guid: c0046ec929681384da6396460d69dae1, type: 3}
       propertyPath: predictSteps
-      value: 10000
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 8632709486798405660, guid: c0046ec929681384da6396460d69dae1, type: 3}
       propertyPath: m_Name

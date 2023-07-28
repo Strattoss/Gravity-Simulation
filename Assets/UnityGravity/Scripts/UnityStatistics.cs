@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Statistics : MonoBehaviour
+public class UnityStatistics : MonoBehaviour
 {
     private readonly List<Rigidbody> rbs = new List<Rigidbody>();
 

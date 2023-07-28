@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8273756477810777517}
-  - component: {fileID: 5283998311810694326}
   - component: {fileID: 7605107336123262046}
+  - component: {fileID: 8692874446529894604}
   m_Layer: 0
   m_Name: SimulationManager
   m_TagString: SimulationManager
@@ -33,18 +33,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5283998311810694326
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2748452595939182481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 906d3b1f7ecbe274694d722152e50d48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7605107336123262046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57,4 +45,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77fc97b3a121f2d47b2a52b9f34af877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _celestialBodiesParent: {fileID: 0}
+--- !u!114 &8692874446529894604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2748452595939182481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 906d3b1f7ecbe274694d722152e50d48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kineticEnergy: 0
+  potentialEnergy: 0
+  totalEnergy: 0
+  minTotalEnergy: 1000
+  maxTotalenergy: -1000
+  momentum: {x: 0, y: 0, z: 0}
