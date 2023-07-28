@@ -57,13 +57,13 @@ public class Predictor : MonoBehaviour
         _ghostSimulationManagerGameObject.SetActive(true);
         _ghostSimulationManagerGameObject.GetComponent<Statistics>().enabled = false;
         SceneManager.MoveGameObjectToScene(_ghostSimulationManagerGameObject, _simulationScene);
-        _ghostSimulationManagerGameObject.GetComponent<GravityManager>().celestialBodiesParent = _ghostCelestialBodiesParent;
+        _ghostSimulationManagerGameObject.GetComponent<SimulationManager>().celestialBodiesParent = _ghostCelestialBodiesParent;
     }
 
     void PredictPaths()
     {
         // prepare line renderers
-        foreach (Gravitybody gb in _realSimulationManagerGameObject.GetComponent<GravityManager>().gravitybodies)
+        foreach (Gravitybody gb in _realSimulationManagerGameObject.GetComponent<SimulationManager>().gravitybodies)
         {
             gb.GetComponent<LineRenderer>().positionCount = 0;
             gb.GetComponent<LineRenderer>().positionCount = predictSteps;
@@ -73,16 +73,16 @@ public class Predictor : MonoBehaviour
         {
             _physicsScene.Simulate(Time.fixedDeltaTime);
 
-            _ghostSimulationManagerGameObject.GetComponent<GravityManager>().DoScenewideVerletStep();
+            _ghostSimulationManagerGameObject.GetComponent<SimulationManager>().DoScenewideVerletStep();
 
-            foreach (Gravitybody ghostGb in _ghostSimulationManagerGameObject.GetComponent<GravityManager>().gravitybodies)
+            foreach (Gravitybody ghostGb in _ghostSimulationManagerGameObject.GetComponent<SimulationManager>().gravitybodies)
             {
                 ghostToReal[ghostGb].GetComponent<LineRenderer>().SetPosition(i, ghostGb.position);
             }
         }
 
         // trim prediction lines (if a body was destroyed, the prediction line should end on body's last position)
-        foreach (var gb in _realSimulationManagerGameObject.GetComponent<GravityManager>().gravitybodies)
+        foreach (var gb in _realSimulationManagerGameObject.GetComponent<SimulationManager>().gravitybodies)
         {
             gb.GetComponent<PredictionLine>().TrimPredictionLine();
         }

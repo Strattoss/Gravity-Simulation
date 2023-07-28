@@ -15,14 +15,22 @@ public class MovementMode : MonoBehaviour
             {
                 // The ray has hit something
                 // You can now handle the hit object or perform any desired actions
-                GetComponent<FreeMovement>().enabled = false;
-                GetComponent<FollowSmoothly>().target = hit.collider.transform;
-                GetComponent<FollowSmoothly>().enabled = true;
+                SelectFollowSmoothly(hit.collider.transform);
             }
             else {
-                GetComponent<FollowSmoothly>().enabled = false;
-                GetComponent<FreeMovement>().enabled = true;
+                SelectFreeMovement();
             }
         }
+    }
+
+    public void SelectFreeMovement() {
+        GetComponent<FollowSmoothly>().enabled = false;
+        GetComponent<FreeMovement>().enabled = true;
+    }
+
+    public void SelectFollowSmoothly(Transform transform) {
+        GetComponent<FreeMovement>().enabled = false;
+        GetComponent<FollowSmoothly>().target = transform;
+        GetComponent<FollowSmoothly>().enabled = true;
     }
 }

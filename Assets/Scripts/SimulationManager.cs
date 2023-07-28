@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GravityManager : MonoBehaviour
+public class SimulationManager : MonoBehaviour
 {
     public LinkedList<Gravitybody> gravitybodies { get; } = new LinkedList<Gravitybody>();
 
@@ -32,6 +32,11 @@ public class GravityManager : MonoBehaviour
             gravitybodies.AddFirst(gb);
             gb.SearchForAndSetGravityManager();
         }
+    }
+
+    public void SignGravitybodyIn(Gravitybody gb) {
+        var b = gravitybodies.AddFirst(gb);
+    
     }
 
     public void SignGravitybodyOut(Gravitybody gb) {

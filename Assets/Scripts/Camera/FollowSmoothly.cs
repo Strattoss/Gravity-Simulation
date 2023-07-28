@@ -16,6 +16,10 @@ public class FollowSmoothly : MonoBehaviour
 
     void LateUpdate()
     {
+        if (target == null) {
+            GetComponent<MovementMode>().SelectFreeMovement();
+        }
+
         _distance -= Input.GetAxis("Mouse ScrollWheel") * _zoomSens;
 
         if (Input.GetButton("Fire2"))

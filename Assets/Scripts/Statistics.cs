@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Statistics : MonoBehaviour
 {
-    private GravityManager _gravityManager;
+    private SimulationManager _gravityManager;
     public float kineticEnergy, potentialEnergy, totalEnergy;
     public float minTotalEnergy = 1000, maxTotalenergy = -1000;
     public Vector3 momentum;
@@ -12,7 +12,7 @@ public class Statistics : MonoBehaviour
 
     void Start()
     {
-        _gravityManager = GameObject.Find("SimulationManager").GetComponent<GravityManager>();
+        _gravityManager = GameObject.Find("SimulationManager").GetComponent<SimulationManager>();
     }
 
     void Update()

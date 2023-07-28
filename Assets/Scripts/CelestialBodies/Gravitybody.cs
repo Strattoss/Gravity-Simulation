@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Gravitybody : MonoBehaviour
 {
-    private GravityManager _simulationManager;
+    private SimulationManager _simulationManager;
     public Vector3 position
     {
         get { return transform.position; }
@@ -20,6 +20,8 @@ public class Gravitybody : MonoBehaviour
             return velocity * mass;
         }
     }
+
+    [field: SerializeField] public Vector3 force { get; private set; }
 
     public float kineticEnergy
     {
@@ -38,7 +40,7 @@ public class Gravitybody : MonoBehaviour
         if (simulationManagers.Length != 1) {
             throw new System.Exception("There should be exactly one SimulationManager!");
         }
-        _simulationManager = simulationManagers[0].GetComponent<GravityManager>();
+        _simulationManager = simulationManagers[0].GetComponent<SimulationManager>();
     }
 
     protected void SignOutOfGravityManager()
@@ -63,7 +65,8 @@ public class Gravitybody : MonoBehaviour
     }
 
     #region Verlet Integration
-    /*  
+    /*
+    This paper helped a looot: https://young.physics.ucsc.edu/115/leapfrog.pdf
     Shortened algorithm idea:
      - Vector3 halfPosition = earthRb.position + 0.5f * dt * velocity;
      - velocity = velocity + dt * CalculateForce(halfPosition);
@@ -79,7 +82,8 @@ public class Gravitybody : MonoBehaviour
     /// <summary> Second step of Verlet velocity method. Updates body's velocity </summary>
     public void VerletStep2()
     {
-        velocity += Time.fixedDeltaTime * CalculateForce() / mass;
+        force = CalculateForce();
+        velocity += Time.fixedDeltaTime * force / mass;
     }
 
     /// <summary> Third and last step of Verlet velocity method. Updates body's final position </summary>
