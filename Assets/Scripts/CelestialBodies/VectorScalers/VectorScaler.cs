@@ -5,6 +5,7 @@ using UnityEngine;
 public class VectorScaler : MonoBehaviour
 {
     protected Gravitybody gb;
+    public float lengthMultiplier = 1f;
 
     void Start() {
         gb = GetComponentInParent<Gravitybody>();
@@ -18,7 +19,7 @@ public class VectorScaler : MonoBehaviour
 
     protected void ScaleLength(float magnitude)
     {
-        transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, magnitude);
+        transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, magnitude * lengthMultiplier);
     }
 
     protected void RotateToDirection(Vector3 direction)
