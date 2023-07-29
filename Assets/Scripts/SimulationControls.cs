@@ -1,15 +1,60 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.Reflection;
 
 public class SimulationControls : MonoBehaviour
 {
     private Predictor _predictor;
-    private float _rememberedTimeScale = 1.0f;
+    public float rememberedSimulationSpeed { get; private set; } = 1.0f;
+    public float velocityVectorsLength
+    {
+        get
+        {
+            return _vectorTypeToFieldDict[typeof(VelocityVectorScaler)];
+        }
+        private set
+        {
+            _vectorTypeToFieldDict[typeof(VelocityVectorScaler)] = value;
+            PropagateVectorsLengthMultiplier<VelocityVectorScaler>();
+        }
+    }
+    public float momentumVectorsLength
+    {
+        get
+        {
+            return _vectorTypeToFieldDict[typeof(MomentumVectorScaler)];
+        }
+        private set
+        {
+            _vectorTypeToFieldDict[typeof(MomentumVectorScaler)] = value;
+            PropagateVectorsLengthMultiplier<MomentumVectorScaler>();
+        }
+    }
+    public float forceVectorsLength
+    {
+        get
+        {
+            return _vectorTypeToFieldDict[typeof(ForceVectorScaler)];
+        }
+        private set
+        {
+            _vectorTypeToFieldDict[typeof(ForceVectorScaler)] = value;
+            PropagateVectorsLengthMultiplier<ForceVectorScaler>();
+        }
+    }
+    private Dictionary<Type, float> _vectorTypeToFieldDict = new Dictionary<Type, float>();
+
+    private const float _deltaSimulationSpeed = 0.125f;
+    private const float _deltaVectorLength = 0.125f;
 
     void Start()
     {
         _predictor = GameObject.FindObjectOfType<Predictor>();
+        _vectorTypeToFieldDict[typeof(VelocityVectorScaler)] = 1.0f;
+        _vectorTypeToFieldDict[typeof(MomentumVectorScaler)] = 1.0f;
+        _vectorTypeToFieldDict[typeof(ForceVectorScaler)] = 1.0f;
     }
 
     void Update()
@@ -17,15 +62,7 @@ public class SimulationControls : MonoBehaviour
         // stop simulation
         if (Input.GetKeyDown(KeyCode.BackQuote))
         {
-            if (Time.timeScale == 0f)
-            {
-                SetSimulationSpeed(_rememberedTimeScale);
-            }
-            else
-            {
-                _rememberedTimeScale = Time.timeScale;
-                SetSimulationSpeed(0f);
-            }
+            PauseUnpauseSimulation();
         }
 
         // change simulation speed
@@ -33,7 +70,7 @@ public class SimulationControls : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Alpha0 + i))
             {
-                SetSimulationSpeed(i);
+                SetTimeScale(i);
                 break;
             }
         }
@@ -41,12 +78,12 @@ public class SimulationControls : MonoBehaviour
         // increase simulation speed
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            DeltaSimulationSpeed(0.125f);
+            DeltaSimulationSpeed(_deltaSimulationSpeed);
         }
         // decrease simulation speed
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            DeltaSimulationSpeed(-0.125f);
+            DeltaSimulationSpeed(-_deltaSimulationSpeed);
         }
 
         // draw prediction lines
@@ -56,68 +93,116 @@ public class SimulationControls : MonoBehaviour
         }
 
         // toggle vector visibility
-        if (Input.GetKeyDown(KeyCode.Keypad4)) {
+        if (Input.GetKeyDown(KeyCode.Keypad4))
+        {
             ToggleVectors<VelocityVectorScaler>();
         }
-        if (Input.GetKeyDown(KeyCode.Keypad5)) {
+        if (Input.GetKeyDown(KeyCode.Keypad5))
+        {
             ToggleVectors<MomentumVectorScaler>();
         }
-        if (Input.GetKeyDown(KeyCode.Keypad6)) {
+        if (Input.GetKeyDown(KeyCode.Keypad6))
+        {
             ToggleVectors<ForceVectorScaler>();
         }
 
         // increase / decrease vector lengths
-        if (Input.GetKeyDown(KeyCode.Keypad1)) {
-            DeltaVectorsLengthMultiplier<VelocityVectorScaler>(-0.125f);
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            velocityVectorsLength -= _deltaVectorLength;
         }
-        if (Input.GetKeyDown(KeyCode.Keypad7)) {
-            DeltaVectorsLengthMultiplier<VelocityVectorScaler>(0.125f);
+        if (Input.GetKeyDown(KeyCode.Keypad7))
+        {
+            velocityVectorsLength += _deltaVectorLength;
         }
-        if (Input.GetKeyDown(KeyCode.Keypad2)) {
-            DeltaVectorsLengthMultiplier<MomentumVectorScaler>(-0.125f);
+        if (Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            momentumVectorsLength -= _deltaVectorLength;
         }
-        if (Input.GetKeyDown(KeyCode.Keypad8)) {
-            DeltaVectorsLengthMultiplier<MomentumVectorScaler>(0.125f);
+        if (Input.GetKeyDown(KeyCode.Keypad8))
+        {
+            momentumVectorsLength += _deltaVectorLength;
         }
-        if (Input.GetKeyDown(KeyCode.Keypad3)) {
-            DeltaVectorsLengthMultiplier<ForceVectorScaler>(-0.125f);
+        if (Input.GetKeyDown(KeyCode.Keypad3))
+        {
+            forceVectorsLength -= _deltaVectorLength;
         }
-        if (Input.GetKeyDown(KeyCode.Keypad9)) {
-            DeltaVectorsLengthMultiplier<ForceVectorScaler>(0.125f);
+        if (Input.GetKeyDown(KeyCode.Keypad9))
+        {
+            forceVectorsLength += _deltaVectorLength;
         }
     }
 
     #region Simulation Speed
-    private void SetSimulationSpeed(float speed)
+    public void PauseUnpauseSimulation()
+    {
+        if (Time.timeScale == 0f)
+        {
+            SetTimeScale(rememberedSimulationSpeed);
+        }
+        else
+        {
+            rememberedSimulationSpeed = Time.timeScale;
+            SetTimeScale(0f);
+        }
+    }
+    private void SetTimeScale(float speed)
     {
         Time.timeScale = speed;
     }
 
+    public void IncreaseSimulationSpeed()
+    {
+        DeltaSimulationSpeed(_deltaSimulationSpeed);
+    }
+
+    public void DecreaseSimulationSpeed()
+    {
+        DeltaSimulationSpeed(-_deltaSimulationSpeed);
+    }
+
     private void DeltaSimulationSpeed(float deltaSpeed)
     {
-        Time.timeScale += deltaSpeed;
+        rememberedSimulationSpeed += deltaSpeed;
+
+        if (Time.timeScale != 0f) Time.timeScale += deltaSpeed;
     }
     #endregion
 
     #region Prediction
-    private void Predict() {
+    public void Predict()
+    {
         _predictor.Predict();
     }
     #endregion
 
     #region Vector Displaying
-    private void ToggleVectors<SomeVectorScaler>() where SomeVectorScaler: VectorScaler {
+    public void ToggleVectors<SomeVectorScaler>() where SomeVectorScaler : VectorScaler
+    {
         foreach (SomeVectorScaler vectorScaler in GameObject.FindObjectsByType<SomeVectorScaler>(FindObjectsInactive.Include, FindObjectsSortMode.None))
         {
             vectorScaler.gameObject.SetActive(!vectorScaler.gameObject.activeSelf);
         }
     }
 
-    private void DeltaVectorsLengthMultiplier<SomeVectorScaler>(float deltaLengthMultiplier) where SomeVectorScaler: VectorScaler {
+    private void PropagateVectorsLengthMultiplier<SomeVectorScaler>() where SomeVectorScaler : VectorScaler
+    {
         foreach (SomeVectorScaler vectorScaler in GameObject.FindObjectsByType<SomeVectorScaler>(FindObjectsInactive.Include, FindObjectsSortMode.None))
         {
-            vectorScaler.lengthMultiplier += deltaLengthMultiplier;
+            vectorScaler.lengthMultiplier = _vectorTypeToFieldDict[typeof(SomeVectorScaler)];
         }
+    }
+
+    public void IncreaseVectorsLengthMultiplier<SomeVectorScaler>() where SomeVectorScaler : VectorScaler
+    {
+        _vectorTypeToFieldDict[typeof(SomeVectorScaler)] += _deltaVectorLength;
+        PropagateVectorsLengthMultiplier<SomeVectorScaler>();
+    }
+
+    public void DecreaseVectorsLengthMultiplier<SomeVectorScaler>() where SomeVectorScaler : VectorScaler
+    {
+        _vectorTypeToFieldDict[typeof(SomeVectorScaler)] -= _deltaVectorLength;
+        PropagateVectorsLengthMultiplier<SomeVectorScaler>();
     }
     #endregion
 }

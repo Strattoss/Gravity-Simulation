@@ -1,0 +1,52 @@
+#main {
+    background-color: rgba(0, 0, 0, 0.28);
+    color: rgb(233, 233, 233);
+}
+
+.unity-group-box {
+    border-left-width: 4px;
+    border-right-width: 4px;
+    border-top-width: 4px;
+    border-bottom-width: 4px;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.group-title {
+    -unity-font-style: bold;
+    -unity-text-align: upper-center;
+    font-size: 16px;
+}
+
+.unity-button {
+    background-color: rgba(0, 0, 0, 0.5);
+    -unity-text-align: middle-center;
+}
+
+.unity-button:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+    transition-duration: 0.5s;
+}
+
+.property {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    flex-direction: row;
+}
+
+.property:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+    transition-duration: 0.5s;
+}

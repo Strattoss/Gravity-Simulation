@@ -8,6 +8,7 @@ TagManager:
   - CelestialBody
   - CelestialBodiesParent
   - SimulationManager
+  - SimulationController
   layers:
   - Default
   - TransparentFX
