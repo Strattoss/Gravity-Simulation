@@ -1,6 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/SimulationUI/SimulationUI.uss?fileID=7433441132597879392&amp;guid=228a26adcfb53bb44aa2b427546de236&amp;type=3#SimulationUI" />
-    <ui:VisualElement name="main" style="flex-grow: 1; width: 338px;">
+    <ui:VisualElement name="simulationUI" class="simulationUI--hide" style="flex-grow: 1; width: 340px;">
+        <ui:Button text="Q" display-tooltip-when-elided="true" name="toggle-simulationUI" style="left: 340px; position: absolute; border-top-right-radius: 10px; border-bottom-right-radius: 10px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;" />
         <ui:GroupBox name="statistics">
             <ui:Label tabindex="-1" text="Simulation statistics" display-tooltip-when-elided="true" class="group-title" />
             <ui:VisualElement class="property">
@@ -23,6 +24,7 @@
                 <ui:Label tabindex="-1" text="#" display-tooltip-when-elided="true" name="velocity-length" />
                 <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; justify-content: flex-end;">
                     <ui:Button text="-" display-tooltip-when-elided="true" name="velocity-length-down" style="width: 30px; height: 30px;" />
+                    <ui:Button text="||" display-tooltip-when-elided="true" name="velocity-length-toggle" style="width: 30px; height: 30px;" />
                     <ui:Button text="+" display-tooltip-when-elided="true" name="velocity-length-up" style="width: 30px; height: 30px;" />
                 </ui:VisualElement>
             </ui:VisualElement>
@@ -31,6 +33,7 @@
                 <ui:Label tabindex="-1" text="#" display-tooltip-when-elided="true" name="momentum-length" />
                 <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; justify-content: flex-end;">
                     <ui:Button text="-" display-tooltip-when-elided="true" name="momentum-length-down" style="width: 30px; height: 30px;" />
+                    <ui:Button text="||" display-tooltip-when-elided="true" name="momentum-length-toggle" style="width: 30px; height: 30px;" />
                     <ui:Button text="+" display-tooltip-when-elided="true" name="momentum-length-up" style="width: 30px; height: 30px;" />
                 </ui:VisualElement>
             </ui:VisualElement>
@@ -39,6 +42,7 @@
                 <ui:Label tabindex="-1" text="#" display-tooltip-when-elided="true" name="force-length" />
                 <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; justify-content: flex-end;">
                     <ui:Button text="-" display-tooltip-when-elided="true" name="force-length-down" style="width: 30px; height: 30px;" />
+                    <ui:Button text="||" display-tooltip-when-elided="true" name="force-length-toggle" style="width: 30px; height: 30px;" />
                     <ui:Button text="+" display-tooltip-when-elided="true" name="force-length-up" style="width: 30px; height: 30px;" />
                 </ui:VisualElement>
             </ui:VisualElement>
@@ -50,6 +54,7 @@
                 <ui:Label tabindex="-1" text="#" display-tooltip-when-elided="true" name="simulation-speed" />
                 <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; justify-content: flex-end;">
                     <ui:Button text="-" display-tooltip-when-elided="true" name="simulation-speed-down" style="width: 30px; height: 30px;" />
+                    <ui:Button text="||" display-tooltip-when-elided="true" name="simulation-speed-toggle" style="width: 30px; height: 30px;" />
                     <ui:Button text="+" display-tooltip-when-elided="true" name="simulation-speed-up" style="width: 30px; height: 30px;" />
                 </ui:VisualElement>
             </ui:VisualElement>

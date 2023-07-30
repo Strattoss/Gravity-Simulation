@@ -1,6 +1,11 @@
-#main {
+#simulationUI {
     background-color: rgba(0, 0, 0, 0.28);
     color: rgb(233, 233, 233);
+    transition-duration: 0.5s;
+}
+
+.simulationUI--hide {
+    translate: -340px 0;
 }
 
 .unity-group-box {

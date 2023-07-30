@@ -6,6 +6,9 @@ public class SimulationUI : MonoBehaviour
     private SimulationControls _simulationControls;
     private Statistics _statistics;
 
+    private VisualElement _simulationUI;
+    private Button _toggleSimulationUI;
+
     // statistics
     private Label _energyKineticLabel;
     private Label _energyPotentialLabel;
@@ -14,17 +17,21 @@ public class SimulationUI : MonoBehaviour
     // simulation properties
     private Label _simulationSpeed;
     private Button _simulationSpeedUp;
+    private Button _simulationSpeedToggle;
     private Button _simulationSpeedDown;
 
     // vectors
     private Label _velocityLength;
     private Button _velocityLengthUp;
+    private Button _velocityLengthToggle;
     private Button _velocityLengthDown;
     private Label _momentumLength;
     private Button _momentumLengthUp;
+    private Button _momentumLengthToggle;
     private Button _momentumLengthDown;
     private Label _forceLength;
     private Button _forceLengthUp;
+    private Button _forceLengthToggle;
     private Button _forceLengthDown;
 
 
@@ -36,6 +43,10 @@ public class SimulationUI : MonoBehaviour
 
 
         var uiDocument = GetComponent<UIDocument>();
+
+        _simulationUI = uiDocument.rootVisualElement.Q<VisualElement>("simulationUI");
+        _toggleSimulationUI = uiDocument.rootVisualElement.Q<Button>("toggle-simulationUI");
+        _toggleSimulationUI.clicked += ToggleSimulationUI;
 
         var statistics = uiDocument.rootVisualElement.Q("statistics");
         BindStatistics(statistics);
@@ -61,6 +72,9 @@ public class SimulationUI : MonoBehaviour
         _simulationSpeedDown = simulationProperties.Q<Button>("simulation-speed-down");
         _simulationSpeedDown.clicked += DecreaseSimulationSpeed;
 
+        _simulationSpeedToggle = simulationProperties.Q<Button>("simulation-speed-toggle");
+        _simulationSpeedToggle.clicked += ToggleSimulationSpeed;
+
         _simulationSpeedUp = simulationProperties.Q<Button>("simulation-speed-up");
         _simulationSpeedUp.clicked += IncreaseSimulationSpeed;
     }
@@ -75,32 +89,51 @@ public class SimulationUI : MonoBehaviour
         // buttons
         _velocityLengthDown = vectors.Q<Button>("velocity-length-down");
         _velocityLengthDown.clicked += DecreaseVelocityLengthMultiplier;
+        _velocityLengthToggle = vectors.Q<Button>("velocity-length-toggle");
+        _velocityLengthToggle.clicked += ToggleVelocityVectors;
         _velocityLengthUp = vectors.Q<Button>("velocity-length-up");
         _velocityLengthUp.clicked += IncreaseVelocityLengthMultiplier;
 
         _momentumLengthDown = vectors.Q<Button>("momentum-length-down");
         _momentumLengthDown.clicked += DecreaseMomentumLengthMultiplier;
+        _momentumLengthToggle = vectors.Q<Button>("momentum-length-toggle");
+        _momentumLengthToggle.clicked += ToggleMomentumVectors;
         _momentumLengthUp = vectors.Q<Button>("momentum-length-up");
         _momentumLengthUp.clicked += IncreaseMomentumLengthMultiplier;
 
         _forceLengthDown = vectors.Q<Button>("force-length-down");
         _forceLengthDown.clicked += DecreaseForceLengthMultiplier;
+        _forceLengthToggle = vectors.Q<Button>("force-length-toggle");
+        _forceLengthToggle.clicked += ToggleForceVectors;
         _forceLengthUp = vectors.Q<Button>("force-length-up");
         _forceLengthUp.clicked += IncreaseForceLengthMultiplier;
     }
 
+    private void ToggleSimulationUI() {
+        _simulationUI.ToggleInClassList("simulationUI--hide");
+    }
+
     private void DecreaseVelocityLengthMultiplier() => _simulationControls.DecreaseVectorsLengthMultiplier<VelocityVectorScaler>();
+    private void ToggleVelocityVectors() => _simulationControls.ToggleVectors<VelocityVectorScaler>();
     private void IncreaseVelocityLengthMultiplier() => _simulationControls.IncreaseVectorsLengthMultiplier<VelocityVectorScaler>();
     private void DecreaseMomentumLengthMultiplier() => _simulationControls.DecreaseVectorsLengthMultiplier<MomentumVectorScaler>();
+    private void ToggleMomentumVectors() => _simulationControls.ToggleVectors<MomentumVectorScaler>();
     private void IncreaseMomentumLengthMultiplier() => _simulationControls.IncreaseVectorsLengthMultiplier<MomentumVectorScaler>();
     private void DecreaseForceLengthMultiplier() => _simulationControls.DecreaseVectorsLengthMultiplier<ForceVectorScaler>();
+    private void ToggleForceVectors() => _simulationControls.ToggleVectors<ForceVectorScaler>();
     private void IncreaseForceLengthMultiplier() => _simulationControls.IncreaseVectorsLengthMultiplier<ForceVectorScaler>();
+
     private void DecreaseSimulationSpeed() => _simulationControls.DecreaseSimulationSpeed();
+    private void ToggleSimulationSpeed() => _simulationControls.PauseUnpauseSimulation();
     private void IncreaseSimulationSpeed() => _simulationControls.IncreaseSimulationSpeed();
 
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Q)) {
+            ToggleSimulationUI();
+        }
+        
         UpdateRealtimeUI();
     }
 
@@ -123,16 +156,22 @@ public class SimulationUI : MonoBehaviour
 
     private void OnDisable()
     {
+        _toggleSimulationUI.clicked -= ToggleSimulationUI;
+
         // Unregister click event callbacks for vectors length buttons
         _velocityLengthDown.clicked -= DecreaseVelocityLengthMultiplier;
+        _velocityLengthToggle.clicked -= ToggleVelocityVectors;
         _velocityLengthUp.clicked -= IncreaseVelocityLengthMultiplier;
         _momentumLengthDown.clicked -= DecreaseMomentumLengthMultiplier;
+        _momentumLengthToggle.clicked -= ToggleMomentumVectors;
         _momentumLengthUp.clicked -= IncreaseMomentumLengthMultiplier;
         _forceLengthDown.clicked -= DecreaseForceLengthMultiplier;
+        _forceLengthToggle.clicked -= ToggleForceVectors;
         _forceLengthUp.clicked -= IncreaseForceLengthMultiplier;
 
         // Unregister click event callbacks for simulation speed buttons
         _simulationSpeedDown.clicked -= DecreaseSimulationSpeed;
+        _simulationSpeedToggle.clicked -= ToggleSimulationSpeed;
         _simulationSpeedUp.clicked -= IncreaseSimulationSpeed;
     }
 }
