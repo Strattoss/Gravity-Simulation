@@ -1,5 +1,5 @@
 #simulationUI {
-    background-color: rgba(0, 0, 0, 0.28);
+    background-color: rgba(0, 0, 0, 0.11);
     color: rgb(233, 233, 233);
     transition-duration: 0.5s;
 }
@@ -8,7 +8,11 @@
     translate: -340px 0;
 }
 
-.unity-group-box {
+.unity-foldout {
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
     border-left-width: 4px;
     border-right-width: 4px;
     border-top-width: 4px;
@@ -21,10 +25,10 @@
     border-right-color: rgb(0, 0, 0);
     border-top-color: rgb(0, 0, 0);
     border-bottom-color: rgb(0, 0, 0);
-    padding-left: 6px;
-    padding-right: 6px;
-    padding-top: 6px;
-    padding-bottom: 6px;
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-top: 4px;
+    margin-bottom: 4px;
 }
 
 .group-title {
@@ -49,9 +53,17 @@
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
     flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
 }
 
 .property:hover {
     background-color: rgba(0, 0, 0, 0.3);
     transition-duration: 0.5s;
+}
+
+.button-grouper {
+    flex-direction: row;
+    flex-grow: 1;
+    justify-content: flex-end;
 }

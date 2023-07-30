@@ -50,7 +50,6 @@ public class Gravitybody : MonoBehaviour
     }
 
     public void MergeWith(Gravitybody otherGb) {
-        // Debug.Log(gameObject.name + " signs out " + otherGb.gameObject.name);
         otherGb.SignOutOfGravityManager();
 
         // average position regarding positions with masses as weights
@@ -60,7 +59,7 @@ public class Gravitybody : MonoBehaviour
 
         mass += otherGb.mass;
 
-        // Debug.Log(gameObject.name + " destroys " + otherGb.gameObject.name);
+        GetComponent<AudioSource>().Play();
         Destroy(otherGb.gameObject);
     }
 

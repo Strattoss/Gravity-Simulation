@@ -1,9 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/SimulationUI/SimulationUI.uss?fileID=7433441132597879392&amp;guid=228a26adcfb53bb44aa2b427546de236&amp;type=3#SimulationUI" />
     <ui:VisualElement name="simulationUI" class="simulationUI--hide" style="flex-grow: 1; width: 340px;">
-        <ui:Button text="Q" display-tooltip-when-elided="true" name="toggle-simulationUI" style="left: 340px; position: absolute; border-top-right-radius: 10px; border-bottom-right-radius: 10px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;" />
-        <ui:GroupBox name="statistics">
-            <ui:Label tabindex="-1" text="Simulation statistics" display-tooltip-when-elided="true" class="group-title" />
+        <ui:Button text="Q" display-tooltip-when-elided="true" name="toggle-simulationUI" focusable="false" style="left: 340px; position: absolute; border-top-right-radius: 10px; border-bottom-right-radius: 10px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;" />
+        <ui:Foldout text="Statistics" name="statistics">
             <ui:VisualElement class="property">
                 <ui:Label tabindex="-1" text="Kinetic energy:" display-tooltip-when-elided="true" />
                 <ui:Label tabindex="-1" text="#" display-tooltip-when-elided="true" name="energy-kinetic" />
@@ -16,48 +15,62 @@
                 <ui:Label tabindex="-1" text="Total energy:" display-tooltip-when-elided="true" />
                 <ui:Label tabindex="-1" text="#" display-tooltip-when-elided="true" name="energy-total" />
             </ui:VisualElement>
-        </ui:GroupBox>
-        <ui:GroupBox name="vectors">
-            <ui:Label tabindex="-1" text="Vector visibility" display-tooltip-when-elided="true" class="group-title" />
+            <ui:VisualElement class="property">
+                <ui:Label tabindex="-1" text="Maximal recorder total energy:" display-tooltip-when-elided="true" />
+                <ui:Label tabindex="-1" text="#" display-tooltip-when-elided="true" name="energy-total-maximal" />
+            </ui:VisualElement>
+            <ui:VisualElement class="property">
+                <ui:Label tabindex="-1" text="Minimal recorder total energy:" display-tooltip-when-elided="true" />
+                <ui:Label tabindex="-1" text="#" display-tooltip-when-elided="true" name="energy-total-minimal" />
+            </ui:VisualElement>
+            <ui:VisualElement class="property">
+                <ui:Label tabindex="-1" text="Momentum" display-tooltip-when-elided="true" />
+                <ui:Label tabindex="-1" text="#" display-tooltip-when-elided="true" name="momentum" />
+            </ui:VisualElement>
+        </ui:Foldout>
+        <ui:Foldout text="Vectors" name="vectors">
             <ui:VisualElement class="property">
                 <ui:Label tabindex="-1" text="Velocity lengths:" display-tooltip-when-elided="true" />
                 <ui:Label tabindex="-1" text="#" display-tooltip-when-elided="true" name="velocity-length" />
-                <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; justify-content: flex-end;">
-                    <ui:Button text="-" display-tooltip-when-elided="true" name="velocity-length-down" style="width: 30px; height: 30px;" />
-                    <ui:Button text="||" display-tooltip-when-elided="true" name="velocity-length-toggle" style="width: 30px; height: 30px;" />
-                    <ui:Button text="+" display-tooltip-when-elided="true" name="velocity-length-up" style="width: 30px; height: 30px;" />
+                <ui:VisualElement class="button-grouper">
+                    <ui:Button text="N7" display-tooltip-when-elided="true" name="velocity-length-down" focusable="false" style="width: 30px; height: 30px;" />
+                    <ui:Button text="N8" display-tooltip-when-elided="true" name="velocity-length-toggle" focusable="false" style="width: 30px; height: 30px;" />
+                    <ui:Button text="N9" display-tooltip-when-elided="true" name="velocity-length-up" focusable="false" style="width: 30px; height: 30px;" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement class="property">
                 <ui:Label tabindex="-1" text="Momentum lengths:" display-tooltip-when-elided="true" />
                 <ui:Label tabindex="-1" text="#" display-tooltip-when-elided="true" name="momentum-length" />
-                <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; justify-content: flex-end;">
-                    <ui:Button text="-" display-tooltip-when-elided="true" name="momentum-length-down" style="width: 30px; height: 30px;" />
-                    <ui:Button text="||" display-tooltip-when-elided="true" name="momentum-length-toggle" style="width: 30px; height: 30px;" />
-                    <ui:Button text="+" display-tooltip-when-elided="true" name="momentum-length-up" style="width: 30px; height: 30px;" />
+                <ui:VisualElement class="button-grouper">
+                    <ui:Button text="N4" display-tooltip-when-elided="true" name="momentum-length-down" focusable="false" style="width: 30px; height: 30px;" />
+                    <ui:Button text="N5" display-tooltip-when-elided="true" name="momentum-length-toggle" focusable="false" style="width: 30px; height: 30px;" />
+                    <ui:Button text="N6" display-tooltip-when-elided="true" name="momentum-length-up" focusable="false" style="width: 30px; height: 30px;" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement class="property">
                 <ui:Label tabindex="-1" text="Force lengths:" display-tooltip-when-elided="true" />
                 <ui:Label tabindex="-1" text="#" display-tooltip-when-elided="true" name="force-length" />
-                <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; justify-content: flex-end;">
-                    <ui:Button text="-" display-tooltip-when-elided="true" name="force-length-down" style="width: 30px; height: 30px;" />
-                    <ui:Button text="||" display-tooltip-when-elided="true" name="force-length-toggle" style="width: 30px; height: 30px;" />
-                    <ui:Button text="+" display-tooltip-when-elided="true" name="force-length-up" style="width: 30px; height: 30px;" />
+                <ui:VisualElement class="button-grouper">
+                    <ui:Button text="N1" display-tooltip-when-elided="true" name="force-length-down" focusable="false" style="width: 30px; height: 30px;" />
+                    <ui:Button text="N2" display-tooltip-when-elided="true" name="force-length-toggle" focusable="false" style="width: 30px; height: 30px;" />
+                    <ui:Button text="N3" display-tooltip-when-elided="true" name="force-length-up" focusable="false" style="width: 30px; height: 30px;" />
                 </ui:VisualElement>
             </ui:VisualElement>
-        </ui:GroupBox>
-        <ui:GroupBox name="simulation-properties">
-            <ui:Label tabindex="-1" text="Simulation properties" display-tooltip-when-elided="true" class="group-title" />
+        </ui:Foldout>
+        <ui:Foldout text="Simulation properties" name="simulation-properties">
             <ui:VisualElement class="property">
                 <ui:Label tabindex="-1" text="Speed:" display-tooltip-when-elided="true" />
                 <ui:Label tabindex="-1" text="#" display-tooltip-when-elided="true" name="simulation-speed" />
-                <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; justify-content: flex-end;">
-                    <ui:Button text="-" display-tooltip-when-elided="true" name="simulation-speed-down" style="width: 30px; height: 30px;" />
-                    <ui:Button text="||" display-tooltip-when-elided="true" name="simulation-speed-toggle" style="width: 30px; height: 30px;" />
-                    <ui:Button text="+" display-tooltip-when-elided="true" name="simulation-speed-up" style="width: 30px; height: 30px;" />
+                <ui:VisualElement class="button-grouper">
+                    <ui:Button text="↓" display-tooltip-when-elided="true" name="simulation-speed-down" focusable="false" style="width: 30px; height: 30px;" />
+                    <ui:Button text="~" display-tooltip-when-elided="true" name="simulation-speed-toggle" focusable="false" style="width: 30px; height: 30px;" />
+                    <ui:Button text="↑" display-tooltip-when-elided="true" name="simulation-speed-up" focusable="false" style="width: 30px; height: 30px;" />
                 </ui:VisualElement>
             </ui:VisualElement>
-        </ui:GroupBox>
+            <ui:VisualElement class="property" style="justify-content: space-between;">
+                <ui:Label tabindex="-1" text="Predict:" display-tooltip-when-elided="true" />
+                <ui:Button text="P" display-tooltip-when-elided="true" name="simulation-predict" focusable="false" style="width: 30px; height: 30px;" />
+            </ui:VisualElement>
+        </ui:Foldout>
     </ui:VisualElement>
 </ui:UXML>

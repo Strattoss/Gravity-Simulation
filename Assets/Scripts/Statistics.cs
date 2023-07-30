@@ -5,9 +5,9 @@ using UnityEngine;
 public class Statistics : MonoBehaviour
 {
     private SimulationManager _gravityManager;
-    public float kineticEnergy { get; private set; }
-    public float potentialEnergy { get; private set; }
-    public float totalEnergy { get; private set; }
+    [field:SerializeField] public float kineticEnergy { get; private set; }
+    [field:SerializeField] public float potentialEnergy { get; private set; }
+    [field:SerializeField] public float totalEnergy { get; private set; }
     public float minTotalEnergy = 1000, maxTotalenergy = -1000;
     public Vector3 momentum;
 

@@ -70,6 +70,7 @@ public class SimulationControls : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Alpha0 + i))
             {
+                rememberedSimulationSpeed = i;
                 SetTimeScale(i);
                 break;
             }
@@ -93,7 +94,7 @@ public class SimulationControls : MonoBehaviour
         }
 
         // toggle vector visibility
-        if (Input.GetKeyDown(KeyCode.Keypad4))
+        if (Input.GetKeyDown(KeyCode.Keypad8))
         {
             ToggleVectors<VelocityVectorScaler>();
         }
@@ -101,33 +102,33 @@ public class SimulationControls : MonoBehaviour
         {
             ToggleVectors<MomentumVectorScaler>();
         }
-        if (Input.GetKeyDown(KeyCode.Keypad6))
+        if (Input.GetKeyDown(KeyCode.Keypad2))
         {
             ToggleVectors<ForceVectorScaler>();
         }
 
         // increase / decrease vector lengths
-        if (Input.GetKeyDown(KeyCode.Keypad1))
+        if (Input.GetKeyDown(KeyCode.Keypad7))
         {
             velocityVectorsLength -= _deltaVectorLength;
         }
-        if (Input.GetKeyDown(KeyCode.Keypad7))
+        if (Input.GetKeyDown(KeyCode.Keypad9))
         {
             velocityVectorsLength += _deltaVectorLength;
         }
-        if (Input.GetKeyDown(KeyCode.Keypad2))
+        if (Input.GetKeyDown(KeyCode.Keypad4))
         {
             momentumVectorsLength -= _deltaVectorLength;
         }
-        if (Input.GetKeyDown(KeyCode.Keypad8))
+        if (Input.GetKeyDown(KeyCode.Keypad6))
         {
             momentumVectorsLength += _deltaVectorLength;
         }
-        if (Input.GetKeyDown(KeyCode.Keypad3))
+        if (Input.GetKeyDown(KeyCode.Keypad1))
         {
             forceVectorsLength -= _deltaVectorLength;
         }
-        if (Input.GetKeyDown(KeyCode.Keypad9))
+        if (Input.GetKeyDown(KeyCode.Keypad3))
         {
             forceVectorsLength += _deltaVectorLength;
         }

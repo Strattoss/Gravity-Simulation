@@ -5,20 +5,25 @@ public class SimulationUI : MonoBehaviour
 {
     private SimulationControls _simulationControls;
     private Statistics _statistics;
+    private Predictor _predictor;
 
     private VisualElement _simulationUI;
     private Button _toggleSimulationUI;
 
     // statistics
-    private Label _energyKineticLabel;
-    private Label _energyPotentialLabel;
-    private Label _energyTotalLabel;
+    private Label _energyKinetic;
+    private Label _energyPotential;
+    private Label _energyTotal;
+    private Label _energyTotalMaximal;
+    private Label _energyTotalMinimal;
+    private Label _momentum;
 
     // simulation properties
     private Label _simulationSpeed;
     private Button _simulationSpeedUp;
     private Button _simulationSpeedToggle;
     private Button _simulationSpeedDown;
+    private Button _predict;
 
     // vectors
     private Label _velocityLength;
@@ -40,6 +45,7 @@ public class SimulationUI : MonoBehaviour
     {
         _simulationControls = GameObject.FindGameObjectWithTag("SimulationController").GetComponent<SimulationControls>();
         _statistics = GameObject.FindGameObjectWithTag("SimulationManager").GetComponent<Statistics>();
+        _predictor = GameObject.FindObjectOfType<Predictor>();
 
 
         var uiDocument = GetComponent<UIDocument>();
@@ -60,9 +66,14 @@ public class SimulationUI : MonoBehaviour
 
     private void BindStatistics(VisualElement statistics)
     {
-        _energyKineticLabel = statistics.Q<Label>("energy-kinetic");
-        _energyPotentialLabel = statistics.Q<Label>("energy-potential");
-        _energyTotalLabel = statistics.Q<Label>("energy-total");
+        _energyKinetic = statistics.Q<Label>("energy-kinetic");
+        _energyPotential = statistics.Q<Label>("energy-potential");
+        _energyTotal = statistics.Q<Label>("energy-total");
+
+        _energyTotalMaximal = statistics.Q<Label>("energy-total-maximal");
+        _energyTotalMinimal = statistics.Q<Label>("energy-total-minimal");
+
+        _momentum = statistics.Q<Label>("momentum");
     }
 
     private void BindSimulationProperties(VisualElement simulationProperties)
@@ -77,6 +88,9 @@ public class SimulationUI : MonoBehaviour
 
         _simulationSpeedUp = simulationProperties.Q<Button>("simulation-speed-up");
         _simulationSpeedUp.clicked += IncreaseSimulationSpeed;
+
+        _predict = simulationProperties.Q<Button>("simulation-predict");
+        _predict.clicked += SimulationPredict;
     }
 
     private void BindVectors(VisualElement vectors)
@@ -126,6 +140,7 @@ public class SimulationUI : MonoBehaviour
     private void DecreaseSimulationSpeed() => _simulationControls.DecreaseSimulationSpeed();
     private void ToggleSimulationSpeed() => _simulationControls.PauseUnpauseSimulation();
     private void IncreaseSimulationSpeed() => _simulationControls.IncreaseSimulationSpeed();
+    private void SimulationPredict() => _predictor.Predict();
 
 
     private void Update()
@@ -133,7 +148,7 @@ public class SimulationUI : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q)) {
             ToggleSimulationUI();
         }
-        
+
         UpdateRealtimeUI();
     }
 
@@ -141,9 +156,14 @@ public class SimulationUI : MonoBehaviour
     private void UpdateRealtimeUI()
     {
         // statistics
-        _energyKineticLabel.text = _statistics.kineticEnergy.ToString();
-        _energyPotentialLabel.text = _statistics.potentialEnergy.ToString();
-        _energyTotalLabel.text = _statistics.totalEnergy.ToString();
+        _energyKinetic.text = _statistics.kineticEnergy.ToString();
+        _energyPotential.text = _statistics.potentialEnergy.ToString();
+        _energyTotal.text = _statistics.totalEnergy.ToString();
+
+        _energyTotalMaximal.text = _statistics.maxTotalenergy.ToString();
+        _energyTotalMinimal.text = _statistics.minTotalEnergy.ToString();
+
+        _momentum.text = _statistics.momentum.ToString();
 
         // simulation properties
         _simulationSpeed.text = _simulationControls.rememberedSimulationSpeed.ToString();
@@ -173,5 +193,6 @@ public class SimulationUI : MonoBehaviour
         _simulationSpeedDown.clicked -= DecreaseSimulationSpeed;
         _simulationSpeedToggle.clicked -= ToggleSimulationSpeed;
         _simulationSpeedUp.clicked -= IncreaseSimulationSpeed;
+        _predict.clicked -= SimulationPredict;
     }
 }
