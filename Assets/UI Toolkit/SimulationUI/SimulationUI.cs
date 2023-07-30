@@ -1,6 +1,14 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
+struct PropertyControls
+    {
+        public Label value;
+        public Button up;
+        public Button down;
+        public Button toggle;
+    }
+
 public class SimulationUI : MonoBehaviour
 {
     private SimulationControls _simulationControls;
@@ -11,35 +19,16 @@ public class SimulationUI : MonoBehaviour
     private Button _toggleSimulationUI;
 
     // statistics
-    private Label _energyKinetic;
-    private Label _energyPotential;
-    private Label _energyTotal;
-    private Label _energyTotalMaximal;
-    private Label _energyTotalMinimal;
-    private Label _momentum;
+    private Label _energyKinetic, _energyPotential, _energyTotal, _energyTotalMaximal, _energyTotalMinimal, _totalMomentum;
 
     // simulation properties
-    private Label _simulationSpeed;
-    private Button _simulationSpeedUp;
-    private Button _simulationSpeedToggle;
-    private Button _simulationSpeedDown;
+    private PropertyControls _simulationSpeed;
     private Button _predict;
 
     // vectors
-    private Label _velocityLength;
-    private Button _velocityLengthUp;
-    private Button _velocityLengthToggle;
-    private Button _velocityLengthDown;
-    private Label _momentumLength;
-    private Button _momentumLengthUp;
-    private Button _momentumLengthToggle;
-    private Button _momentumLengthDown;
-    private Label _forceLength;
-    private Button _forceLengthUp;
-    private Button _forceLengthToggle;
-    private Button _forceLengthDown;
+    
 
-
+    private PropertyControls _velocityVectors, _momentumVectors, _forceVectors;
 
     private void OnEnable()
     {
@@ -73,21 +62,21 @@ public class SimulationUI : MonoBehaviour
         _energyTotalMaximal = statistics.Q<Label>("energy-total-maximal");
         _energyTotalMinimal = statistics.Q<Label>("energy-total-minimal");
 
-        _momentum = statistics.Q<Label>("momentum");
+        _totalMomentum = statistics.Q<Label>("momentum");
     }
 
     private void BindSimulationProperties(VisualElement simulationProperties)
     {
-        _simulationSpeed = simulationProperties.Q<Label>("simulation-speed");
+        _simulationSpeed.value = simulationProperties.Q<Label>("simulation-speed");
 
-        _simulationSpeedDown = simulationProperties.Q<Button>("simulation-speed-down");
-        _simulationSpeedDown.clicked += DecreaseSimulationSpeed;
+        _simulationSpeed.down = simulationProperties.Q<Button>("simulation-speed-down");
+        _simulationSpeed.down.clicked += DecreaseSimulationSpeed;
 
-        _simulationSpeedToggle = simulationProperties.Q<Button>("simulation-speed-toggle");
-        _simulationSpeedToggle.clicked += ToggleSimulationSpeed;
+        _simulationSpeed.toggle = simulationProperties.Q<Button>("simulation-speed-toggle");
+        _simulationSpeed.toggle.clicked += ToggleSimulationSpeed;
 
-        _simulationSpeedUp = simulationProperties.Q<Button>("simulation-speed-up");
-        _simulationSpeedUp.clicked += IncreaseSimulationSpeed;
+        _simulationSpeed.up = simulationProperties.Q<Button>("simulation-speed-up");
+        _simulationSpeed.up.clicked += IncreaseSimulationSpeed;
 
         _predict = simulationProperties.Q<Button>("simulation-predict");
         _predict.clicked += SimulationPredict;
@@ -95,32 +84,29 @@ public class SimulationUI : MonoBehaviour
 
     private void BindVectors(VisualElement vectors)
     {
-        // labels
-        _velocityLength = vectors.Q<Label>("velocity-length");
-        _momentumLength = vectors.Q<Label>("momentum-length");
-        _forceLength = vectors.Q<Label>("force-length");
+        _velocityVectors.value = vectors.Q<Label>("velocity-length");
+        _velocityVectors.down = vectors.Q<Button>("velocity-length-down");
+        _velocityVectors.down.clicked += DecreaseVelocityLengthMultiplier;
+        _velocityVectors.toggle = vectors.Q<Button>("velocity-length-toggle");
+        _velocityVectors.toggle.clicked += ToggleVelocityVectors;
+        _velocityVectors.up = vectors.Q<Button>("velocity-length-up");
+        _velocityVectors.up.clicked += IncreaseVelocityLengthMultiplier;
 
-        // buttons
-        _velocityLengthDown = vectors.Q<Button>("velocity-length-down");
-        _velocityLengthDown.clicked += DecreaseVelocityLengthMultiplier;
-        _velocityLengthToggle = vectors.Q<Button>("velocity-length-toggle");
-        _velocityLengthToggle.clicked += ToggleVelocityVectors;
-        _velocityLengthUp = vectors.Q<Button>("velocity-length-up");
-        _velocityLengthUp.clicked += IncreaseVelocityLengthMultiplier;
+        _momentumVectors.value = vectors.Q<Label>("momentum-length");
+        _momentumVectors.down = vectors.Q<Button>("momentum-length-down");
+        _momentumVectors.down.clicked += DecreaseMomentumLengthMultiplier;
+        _momentumVectors.toggle = vectors.Q<Button>("momentum-length-toggle");
+        _momentumVectors.toggle.clicked += ToggleMomentumVectors;
+        _momentumVectors.up = vectors.Q<Button>("momentum-length-up");
+        _momentumVectors.up.clicked += IncreaseMomentumLengthMultiplier;
 
-        _momentumLengthDown = vectors.Q<Button>("momentum-length-down");
-        _momentumLengthDown.clicked += DecreaseMomentumLengthMultiplier;
-        _momentumLengthToggle = vectors.Q<Button>("momentum-length-toggle");
-        _momentumLengthToggle.clicked += ToggleMomentumVectors;
-        _momentumLengthUp = vectors.Q<Button>("momentum-length-up");
-        _momentumLengthUp.clicked += IncreaseMomentumLengthMultiplier;
-
-        _forceLengthDown = vectors.Q<Button>("force-length-down");
-        _forceLengthDown.clicked += DecreaseForceLengthMultiplier;
-        _forceLengthToggle = vectors.Q<Button>("force-length-toggle");
-        _forceLengthToggle.clicked += ToggleForceVectors;
-        _forceLengthUp = vectors.Q<Button>("force-length-up");
-        _forceLengthUp.clicked += IncreaseForceLengthMultiplier;
+        _forceVectors.value = vectors.Q<Label>("force-length");
+        _forceVectors.down = vectors.Q<Button>("force-length-down");
+        _forceVectors.down.clicked += DecreaseForceLengthMultiplier;
+        _forceVectors.toggle = vectors.Q<Button>("force-length-toggle");
+        _forceVectors.toggle.clicked += ToggleForceVectors;
+        _forceVectors.up = vectors.Q<Button>("force-length-up");
+        _forceVectors.up.clicked += IncreaseForceLengthMultiplier;
     }
 
     private void ToggleSimulationUI() {
@@ -163,15 +149,15 @@ public class SimulationUI : MonoBehaviour
         _energyTotalMaximal.text = _statistics.maxTotalenergy.ToString();
         _energyTotalMinimal.text = _statistics.minTotalEnergy.ToString();
 
-        _momentum.text = _statistics.momentum.ToString();
+        _totalMomentum.text = _statistics.momentum.ToString();
 
         // simulation properties
-        _simulationSpeed.text = _simulationControls.rememberedSimulationSpeed.ToString();
+        _simulationSpeed.value.text = _simulationControls.rememberedSimulationSpeed.ToString();
 
         // vectors
-        _velocityLength.text = _simulationControls.velocityVectorsLength.ToString();
-        _momentumLength.text = _simulationControls.momentumVectorsLength.ToString();
-        _forceLength.text = _simulationControls.forceVectorsLength.ToString();
+        _velocityVectors.value.text = _simulationControls.velocityVectorsLength.ToString();
+        _momentumVectors.value.text = _simulationControls.momentumVectorsLength.ToString();
+        _forceVectors.value.text = _simulationControls.forceVectorsLength.ToString();
     }
 
     private void OnDisable()
@@ -179,20 +165,20 @@ public class SimulationUI : MonoBehaviour
         _toggleSimulationUI.clicked -= ToggleSimulationUI;
 
         // Unregister click event callbacks for vectors length buttons
-        _velocityLengthDown.clicked -= DecreaseVelocityLengthMultiplier;
-        _velocityLengthToggle.clicked -= ToggleVelocityVectors;
-        _velocityLengthUp.clicked -= IncreaseVelocityLengthMultiplier;
-        _momentumLengthDown.clicked -= DecreaseMomentumLengthMultiplier;
-        _momentumLengthToggle.clicked -= ToggleMomentumVectors;
-        _momentumLengthUp.clicked -= IncreaseMomentumLengthMultiplier;
-        _forceLengthDown.clicked -= DecreaseForceLengthMultiplier;
-        _forceLengthToggle.clicked -= ToggleForceVectors;
-        _forceLengthUp.clicked -= IncreaseForceLengthMultiplier;
+        _velocityVectors.down.clicked -= DecreaseVelocityLengthMultiplier;
+        _velocityVectors.toggle.clicked -= ToggleVelocityVectors;
+        _velocityVectors.up.clicked -= IncreaseVelocityLengthMultiplier;
+        _momentumVectors.down.clicked -= DecreaseMomentumLengthMultiplier;
+        _momentumVectors.toggle.clicked -= ToggleMomentumVectors;
+        _momentumVectors.up.clicked -= IncreaseMomentumLengthMultiplier;
+        _forceVectors.down.clicked -= DecreaseForceLengthMultiplier;
+        _forceVectors.toggle.clicked -= ToggleForceVectors;
+        _forceVectors.up.clicked -= IncreaseForceLengthMultiplier;
 
         // Unregister click event callbacks for simulation speed buttons
-        _simulationSpeedDown.clicked -= DecreaseSimulationSpeed;
-        _simulationSpeedToggle.clicked -= ToggleSimulationSpeed;
-        _simulationSpeedUp.clicked -= IncreaseSimulationSpeed;
+        _simulationSpeed.down.clicked -= DecreaseSimulationSpeed;
+        _simulationSpeed.toggle.clicked -= ToggleSimulationSpeed;
+        _simulationSpeed.up.clicked -= IncreaseSimulationSpeed;
         _predict.clicked -= SimulationPredict;
     }
 }
