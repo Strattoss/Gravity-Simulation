@@ -144,6 +144,11 @@ public class SimulationControls : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightArrow)) {
             _sceneLoader.LoadNextScene();
         }
+
+        // exit the app
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            Application.Quit();
+        }
     }
 
     #region Simulation Speed
