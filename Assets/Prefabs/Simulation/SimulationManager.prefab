@@ -57,9 +57,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 906d3b1f7ecbe274694d722152e50d48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kineticEnergy: 0
-  potentialEnergy: 0
-  totalEnergy: 0
+  <kineticEnergy>k__BackingField: 0
+  <potentialEnergy>k__BackingField: 0
+  <totalEnergy>k__BackingField: 0
   minTotalEnergy: 1000
   maxTotalenergy: -1000
   momentum: {x: 0, y: 0, z: 0}

@@ -65,9 +65,10 @@ public class SimulationUI : MonoBehaviour
 
     private void BindSceneLoader(VisualElement sceneLoader)
     {
-        _previousScene = sceneLoader.Q<Button>("previous-scene");
+        _previousScene = sceneLoader.Q<Button>("scene-previous");
         _previousScene.clicked += LoadPreviousScene;
-        _nextScene = sceneLoader.Q<Button>("next-scene");
+        sceneLoader.Q<Label>("scene-title").text = _sceneLoader.currentSceneName;
+        _nextScene = sceneLoader.Q<Button>("scene-next");
         _nextScene.clicked += LoadNextScene;
     }
 

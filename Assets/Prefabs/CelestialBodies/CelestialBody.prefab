@@ -357,9 +357,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: d7a1ddc428376b64d9f0ff1f3fb6235a, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.1
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -549,6 +549,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VelocityVector
       objectReference: {fileID: 0}
+    - target: {fileID: 4914083246745086614, guid: 20335fa2ab4f0f44bb798417baae401c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7433328640538814838, guid: 20335fa2ab4f0f44bb798417baae401c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -645,6 +649,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MomentumVector
       objectReference: {fileID: 0}
+    - target: {fileID: 4914083246745086614, guid: 20335fa2ab4f0f44bb798417baae401c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7433328640538814838, guid: 20335fa2ab4f0f44bb798417baae401c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -736,6 +744,10 @@ PrefabInstance:
     - target: {fileID: 4914083246745086614, guid: 20335fa2ab4f0f44bb798417baae401c, type: 3}
       propertyPath: m_Name
       value: ForceVector
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914083246745086614, guid: 20335fa2ab4f0f44bb798417baae401c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7433328640538814838, guid: 20335fa2ab4f0f44bb798417baae401c, type: 3}
       propertyPath: m_Materials.Array.data[0]

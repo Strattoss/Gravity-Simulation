@@ -8,6 +8,27 @@
     translate: -340px 0;
 }
 
+#scene-title {
+    background-color: rgba(0, 0, 0, 0.5);
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    padding-left: 11px;
+    padding-right: 11px;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    -unity-text-align: middle-center;
+    border-left-color: rgba(149, 149, 149, 0);
+    border-right-color: rgba(149, 149, 149, 0);
+    border-top-color: rgba(149, 149, 149, 0);
+    border-bottom-color: rgba(149, 149, 149, 0);
+    border-left-width: 29px;
+    border-right-width: 29px;
+    border-top-width: 29px;
+    border-bottom-width: 29px;
+}
+
 .unity-foldout {
     padding-left: 4px;
     padding-right: 4px;

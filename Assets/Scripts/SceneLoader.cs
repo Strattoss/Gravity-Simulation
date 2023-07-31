@@ -7,6 +7,12 @@ public class SceneLoader : MonoBehaviour
 {
     private int _currentSceneIndex;
 
+    public string currentSceneName {
+        get {
+            return SceneManager.GetActiveScene().name;
+        }
+    }
+
     void Start()
     {
         _currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
@@ -23,6 +29,4 @@ public class SceneLoader : MonoBehaviour
         var sceneToLoad = (_currentSceneIndex == 0) ? SceneManager.sceneCountInBuildSettings - 1 : (_currentSceneIndex - 1);
         SceneManager.LoadScene(sceneToLoad);
     }
-
-    
 }

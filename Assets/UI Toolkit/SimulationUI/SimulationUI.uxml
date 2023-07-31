@@ -1,8 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/SimulationUI/SimulationUI.uss?fileID=7433441132597879392&amp;guid=228a26adcfb53bb44aa2b427546de236&amp;type=3#SimulationUI" />
     <ui:VisualElement name="scene-loader" class="scene-buttons-holder">
-        <ui:Button text="←" display-tooltip-when-elided="true" focusable="false" name="previous-scene" style="border-bottom-left-radius: 15px;" />
-        <ui:Button text="→" display-tooltip-when-elided="true" focusable="false" name="next-scene" style="border-bottom-right-radius: 15px;" />
+        <ui:Button text="←" display-tooltip-when-elided="true" focusable="false" name="scene-previous" style="border-bottom-left-radius: 15px; border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px;" />
+        <ui:Label tabindex="-1" text="Scene title" display-tooltip-when-elided="true" name="scene-title" style="padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; border-left-color: rgb(149, 149, 149); border-right-color: rgb(149, 149, 149); border-top-color: rgb(149, 149, 149); border-bottom-color: rgb(149, 149, 149); border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px;" />
+        <ui:Button text="→" display-tooltip-when-elided="true" focusable="false" name="scene-next" style="border-bottom-right-radius: 15px;" />
     </ui:VisualElement>
     <ui:VisualElement name="simulationUI" class="simulationUI--hide" style="flex-grow: 1; width: 340px;">
         <ui:Button text="Q" display-tooltip-when-elided="true" name="toggle-simulationUI" focusable="false" style="left: 340px; position: absolute; border-top-right-radius: 10px; border-bottom-right-radius: 10px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;" />

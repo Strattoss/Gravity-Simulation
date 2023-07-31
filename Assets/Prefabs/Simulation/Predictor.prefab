@@ -44,6 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf3033284babe1647a3a1944c4c322ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _realCelestialBodiesParent: {fileID: 0}
-  _realSimulationManagerGameObject: {fileID: 0}
-  predictSteps: 1000
+  predictSteps: 5000
