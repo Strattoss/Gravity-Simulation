@@ -19,6 +19,8 @@ Utilizing the Unity engine, the program's development grew rapidly, evolving int
 
 * Trail Visualization: Witness the movement of celestial bodies through visual trails, providing insight into their past movements.
 
+* Collisions: The simulation incorporates a primitive collision system, allowing celestial bodies to merge while conserving momentum, but not, unfortunatelly, total energy. This approach strikes a balance between accuracy and stability, as it prevents bodies that come into close proximity from gaining unrealistic amounts of kinetic energy. By preserving momentum during collisions, the simulation aims to provide a more realistic simulation, while keeping it computationally feasible.
+
 * Vector Toggle: Customize your view by toggling on/off bodies' vectors, including velocities, momentums, and forces, giving you a comprehensive understanding of their interactions.
 
 * Time Control: Take control of the simulation speed with the ability to accelerate, decelerate, or pause the simulation entirely.
@@ -27,16 +29,18 @@ Utilizing the Unity engine, the program's development grew rapidly, evolving int
 
 * Scene Switching: Explore a collection of premade scenes, each offering unique setups and scenarios for the simulation.
 
-# Keyboard Controls:
+# Controls:
 * WASD: Move the camera to explore the 3D environment.
 
 * Shift + WASD: Accelerate the camera movement speed for faster navigation.
 
 * Mouse scroll: Move the camera forward or backward along the scene.
 
-* Up/Down Arrows: Adjust the simulation speed, making it faster or slower.
+* Click on a celestial body: follow the body
 
 * P: Predict bodies' movement and observe their future positions.
+
+* Up/Down Arrows: Adjust the simulation speed, making it faster or slower.
 
 * 1-9: Set the simulation speed to respective numbers for precise control.
 

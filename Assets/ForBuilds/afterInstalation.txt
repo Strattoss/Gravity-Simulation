@@ -1,13 +1,15 @@
-# Keyboard Controls:
+# Controls:
 * WASD: Move the camera to explore the 3D environment.
 
 * Shift + WASD: Accelerate the camera movement speed for faster navigation.
 
 * Mouse scroll: Move the camera forward or backward along the scene.
 
-* Up/Down Arrows: Adjust the simulation speed, making it faster or slower.
+* Click on a celestial body: follow the body
 
 * P: Predict bodies' movement and observe their future positions.
+
+* Up/Down Arrows: Adjust the simulation speed, making it faster or slower.
 
 * 1-9: Set the simulation speed to respective numbers for precise control.
 
