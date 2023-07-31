@@ -52,5 +52,7 @@ Utilizing the Unity engine, the program's development grew rapidly, evolving int
 
 * Left/Right Arrows: Navigate between previous and next scenes for a diverse simulation experience.
 
+* Escape: Quit the program
+
 #
 Explore the fascinating world of Newton's law of universal gravitation, and enjoy the power to observe celestial mechanics firsthand. Have an extraordinary time discovering the wonders of the cosmos!
