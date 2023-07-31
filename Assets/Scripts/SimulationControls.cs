@@ -7,6 +7,8 @@ using System.Reflection;
 public class SimulationControls : MonoBehaviour
 {
     private Predictor _predictor;
+    private SceneLoader _sceneLoader;
+
     public float rememberedSimulationSpeed { get; private set; } = 1.0f;
     public float velocityVectorsLength
     {
@@ -52,6 +54,8 @@ public class SimulationControls : MonoBehaviour
     void Start()
     {
         _predictor = GameObject.FindObjectOfType<Predictor>();
+        _sceneLoader = GameObject.FindObjectOfType<SceneLoader>();
+
         _vectorTypeToFieldDict[typeof(VelocityVectorScaler)] = 1.0f;
         _vectorTypeToFieldDict[typeof(MomentumVectorScaler)] = 1.0f;
         _vectorTypeToFieldDict[typeof(ForceVectorScaler)] = 1.0f;
@@ -131,6 +135,14 @@ public class SimulationControls : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Keypad3))
         {
             forceVectorsLength += _deltaVectorLength;
+        }
+
+        // load previous/next scene
+        if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+            _sceneLoader.LoadPreviousScene();
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow)) {
+            _sceneLoader.LoadNextScene();
         }
     }
 

@@ -67,3 +67,14 @@
     flex-grow: 1;
     justify-content: flex-end;
 }
+
+.scene-buttons-holder {
+    position: absolute;
+    left: auto;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+    color: rgb(255, 255, 255);
+    -unity-font-style: bold;
+}

@@ -8,5 +8,20 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WorkingSpace.unity
     guid: 73fb7586b3ec9b14787b24e1751b4d85
+  - enabled: 1
+    path: Assets/Scenes/StableConfiguration3.unity
+    guid: fe38202636049834fa93844cae68efc5
+  - enabled: 1
+    path: Assets/Scenes/StableConfiguration2.unity
+    guid: 740f4a4040d93bd4e8b9cf342ae6dee3
+  - enabled: 1
+    path: Assets/Scenes/StableConfiguration1.unity
+    guid: 57e553e1f5bc6d14c8b25f6e018f226b
+  - enabled: 1
+    path: Assets/Scenes/PredictionAndCollisionTest.unity
+    guid: 7c1cea2992c930b41a3a8b4b75e26619
+  - enabled: 1
+    path: Assets/Scenes/MOOoOOoRE.unity
+    guid: 87189db4aac83fe4295b7fde01d11f2e
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: bf9ef3b2e0cc67041b2454b0e3afb1c3, type: 2}

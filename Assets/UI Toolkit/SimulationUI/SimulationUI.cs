@@ -14,9 +14,13 @@ public class SimulationUI : MonoBehaviour
     private SimulationControls _simulationControls;
     private Statistics _statistics;
     private Predictor _predictor;
+    private SceneLoader _sceneLoader;
 
     private VisualElement _simulationUI;
     private Button _toggleSimulationUI;
+
+    // scene buttons
+    private Button _previousScene, _nextScene;
 
     // statistics
     private Label _energyKinetic, _energyPotential, _energyTotal, _energyTotalMaximal, _energyTotalMinimal, _totalMomentum;
@@ -35,13 +39,19 @@ public class SimulationUI : MonoBehaviour
         _simulationControls = GameObject.FindGameObjectWithTag("SimulationController").GetComponent<SimulationControls>();
         _statistics = GameObject.FindGameObjectWithTag("SimulationManager").GetComponent<Statistics>();
         _predictor = GameObject.FindObjectOfType<Predictor>();
+        _sceneLoader = GameObject.FindObjectOfType<SceneLoader>();
 
 
         var uiDocument = GetComponent<UIDocument>();
 
+        // UI panel
         _simulationUI = uiDocument.rootVisualElement.Q<VisualElement>("simulationUI");
         _toggleSimulationUI = uiDocument.rootVisualElement.Q<Button>("toggle-simulationUI");
         _toggleSimulationUI.clicked += ToggleSimulationUI;
+
+        // scene loaders
+        var sceneLoader = uiDocument.rootVisualElement.Q("scene-loader");
+        BindSceneLoader(sceneLoader);
 
         var statistics = uiDocument.rootVisualElement.Q("statistics");
         BindStatistics(statistics);
@@ -51,6 +61,14 @@ public class SimulationUI : MonoBehaviour
 
         var simulationProperties = uiDocument.rootVisualElement.Q("simulation-properties");
         BindSimulationProperties(simulationProperties);
+    }
+
+    private void BindSceneLoader(VisualElement sceneLoader)
+    {
+        _previousScene = sceneLoader.Q<Button>("previous-scene");
+        _previousScene.clicked += LoadPreviousScene;
+        _nextScene = sceneLoader.Q<Button>("next-scene");
+        _nextScene.clicked += LoadNextScene;
     }
 
     private void BindStatistics(VisualElement statistics)
@@ -113,6 +131,8 @@ public class SimulationUI : MonoBehaviour
         _simulationUI.ToggleInClassList("simulationUI--hide");
     }
 
+    private void LoadNextScene() => _sceneLoader.LoadNextScene();
+    private void LoadPreviousScene() => _sceneLoader.LoadPreviousScene();
     private void DecreaseVelocityLengthMultiplier() => _simulationControls.DecreaseVectorsLengthMultiplier<VelocityVectorScaler>();
     private void ToggleVelocityVectors() => _simulationControls.ToggleVectors<VelocityVectorScaler>();
     private void IncreaseVelocityLengthMultiplier() => _simulationControls.IncreaseVectorsLengthMultiplier<VelocityVectorScaler>();
@@ -163,6 +183,9 @@ public class SimulationUI : MonoBehaviour
     private void OnDisable()
     {
         _toggleSimulationUI.clicked -= ToggleSimulationUI;
+
+        _previousScene.clicked -= LoadPreviousScene;
+        _nextScene.clicked -= LoadNextScene;
 
         // Unregister click event callbacks for vectors length buttons
         _velocityVectors.down.clicked -= DecreaseVelocityLengthMultiplier;
