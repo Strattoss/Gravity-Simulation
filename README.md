@@ -1,14 +1,14 @@
 # Gravity Simulation
-Welcome to my gravity simulator! This application offers an immersive 3D experience, allowing you to simulate and visualize Newton's law of universal gravitation. Observe the captivating interactions between planets and stars as they move and interact in a 3D environment.
+Welcome to my gravity simulator! This application offers a 3D experience, allowing you to simulate and visualize Newton's law of universal gravitation. Observe the captivating interactions between planets and stars as they move and interact in a 3D environment.
 
 # Purpose and Background:
-This gravity simulator was created as a result of a college course assignment. The initial task was to write a gravity simulation using Euler integration. However, the simulation produced unstable results, failing to preserve the critical system properties like total energy and total momentum. Determined to find a more accurate and stable method for simulating gravity, I conducted further research on my own during summer holidays. Out of curiosity.
+This gravity simulator was created as a result of my college course assignment. The initial task was to write a gravity simulation using Euler integration. However, the simulation produced highly unstable results, failing to preserve the critical system properties like total energy and total momentum. Determined to find a more accurate and stable method for simulating gravity, I conducted further research on my own during summer holidays. Out of curiosity.
 
-The decision to visualize the simulation was inspired by the desire to gain a deeper understanding of the complex interactions between celestial bodies and to showcase the results of my work to others. I aimed to create an intuitive and visually immersive experience, allowing everyone, regardless of their technical background, to witness the beauty and intricacies of laws of motion in action.
+The decision to visualize the simulation was inspired by the desire to showcase the results of my work to others. I aimed to create an intuitive and visually pleasing experience, allowing everyone, regardless of their technical background, to witness the beauty and intricacies of laws of motion in action.
 
-By presenting the simulation in a user-friendly and interactive manner, I sought to  foster curiosity and appreciation for the marvels of the cosmos beyond the realm of hard-to-understand lines of code.
+By presenting the simulation in a user-friendly and interactive manner, I sought to foster appreciation for the marvels of the cosmos beyond the realm of hard-to-understand lines of code.
 
-Utilizing the Unity engine, the program's development grew rapidly, evolving into a sophisticated and comprehensive simulation tool.
+Utilizing the Unity engine, the program's development grew rapidly, evolving into a nice simulation tool.
 
 # Features:
 * 3D Simulation: Experience a fully 3D simulation of Newton's law of universal gravitation and laws of motion, providing a visually engaging environment.
@@ -19,6 +19,8 @@ Utilizing the Unity engine, the program's development grew rapidly, evolving int
 
 * Trail Visualization: Witness the movement of celestial bodies through visual trails, providing insight into their past movements.
 
+* Trail Prediction: The application is equipped with prediction system that can show you bodies' trajectories in the future! This way you can pin down interresting moments and interactions.
+
 * Collisions: The simulation incorporates a primitive collision system, allowing celestial bodies to merge while conserving momentum, but not, unfortunatelly, total energy. This approach strikes a balance between accuracy and stability, as it prevents bodies that come into close proximity from gaining unrealistic amounts of kinetic energy. By preserving momentum during collisions, the simulation aims to provide a more realistic simulation, while keeping it computationally feasible.
 
 * Vector Toggle: Customize your view by toggling on/off bodies' vectors, including velocities, momentums, and forces, giving you a comprehensive understanding of their interactions.
@@ -28,6 +30,45 @@ Utilizing the Unity engine, the program's development grew rapidly, evolving int
 * UI Statistics: Stay informed throughout the simulation with the UI displaying various statistics, allowing you to track the dynamics of the system.
 
 * Scene Switching: Explore a collection of premade scenes, each offering unique setups and scenarios for the simulation.
+
+# Screenshots
+## Simulation features
+Trajectories
+
+![bodies with its' trajectiories](./Documentation/trajectories.png)
+
+Simulation panel
+
+![simulation statistics panel](./Documentation/statistics.png)
+
+Trajectories prediction
+
+![simulation prediction feature](./Documentation/prediction.png)
+
+Pure chaos
+
+![almighty chaos](./Documentation/chaos.png)
+
+An example of stable 3-body system
+
+![stable lemniscate trajectories](./Documentation/lemniscate.png)
+
+## Vectors
+Force vectors
+
+![force vectors](./Documentation/vectors/force.png)
+
+Speed vectors
+
+![speed vectors](./Documentation/vectors/speed.png)
+
+Momentum vectors
+
+![momentum vectors](./Documentation/vectors/momentum.png)
+
+All vectors at once
+
+![all vectors at once](./Documentation/vectors/all_vectors.png)
 
 # Controls:
 * WASD: Move the camera to explore the 3D environment.
