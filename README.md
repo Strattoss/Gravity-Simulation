@@ -1,6 +1,9 @@
 # Gravity Simulation
 Welcome to my gravity simulator! This application offers a 3D experience, allowing you to simulate and visualize Newton's law of universal gravitation. Observe the captivating interactions between planets and stars as they move and interact in a 3D environment.
 
+# Install
+Only Windows version is available. To install the simulator, download [this instaler](Installers/GravitySimulationSetup.exe) (download button is in the right upper corner). I'm aware that some antivirus programs may flag the installer as potentially harmful, but I can assure you that it is entirely safe and free from any viruses. If you encounter any issues during installation, you may need to persuade your operating system that the app is safe in order to proceed with the installation.
+
 # Purpose and Background:
 This gravity simulator was created as a result of my college course assignment. The initial task was to write a gravity simulation using Euler integration. However, the simulation produced highly unstable results, failing to preserve the critical system properties like total energy and total momentum. Determined to find a more accurate and stable method for simulating gravity, I conducted further research on my own during summer holidays. Out of curiosity.
 
